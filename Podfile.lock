@@ -1,0 +1,24 @@
+PODS:
+  - CalculateCalendarLogic (0.8.1)
+  - FSCalendar (2.8.4)
+  - KDCircularProgress (1.5.4)
+
+DEPENDENCIES:
+  - CalculateCalendarLogic
+  - FSCalendar
+  - KDCircularProgress
+
+SPEC REPOS:
+  trunk:
+    - CalculateCalendarLogic
+    - FSCalendar
+    - KDCircularProgress
+
+SPEC CHECKSUMS:
+  CalculateCalendarLogic: 45ea071add8efe0c30524607d3359eb79de8ba82
+  FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
+
+PODFILE CHECKSUM: 70982ac7377b3d61911f15bec7a4ca9e82d588c7
+
+COCOAPODS: 1.16.2
