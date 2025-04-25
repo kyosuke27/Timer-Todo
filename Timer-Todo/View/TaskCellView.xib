@@ -53,6 +53,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="cellLabel" destination="Ydv-nl-d4X" id="0mz-hs-f7T"/>
                 <outlet property="taskLabel" destination="dO2-MD-w84" id="yWu-PY-IDP"/>
                 <outlet property="timerLabel" destination="eHC-Kc-YEF" id="CEt-KK-9xj"/>
             </connections>

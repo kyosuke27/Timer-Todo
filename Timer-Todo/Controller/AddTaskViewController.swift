@@ -4,9 +4,12 @@ import UIKit
 class AddTaskViewController: UIViewController, UIPickerViewDelegate,
     UIPickerViewDataSource
 {
+    let userDefault = UserDefaults.standard
+    let jsonDecoder = JSONDecoder()
+    var taskArray: [Task] = []
     @IBOutlet weak var timerPickerView: UIPickerView!
     @IBOutlet weak var taskText: UITextField!
-    
+
     let hourArray = Array(0...23)
     let minuteArray = Array(0...59)
     let secondArray = Array(0...59)
@@ -44,6 +47,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
             timerPickerView.bounds.height / 2 - (secondLabel.bounds.height / 2),
             secondLabel.bounds.width, secondLabel.bounds.height)
         timerPickerView.addSubview(secondLabel)
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
 
     }
 
@@ -76,10 +80,57 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
     }
 
     @IBAction func registerTaskAction(_ sender: UIButton) {
-        print("taskText : \(self.taskText.text!)")
         // Timerの値
-        print("hour : \(self.hourArray[timerPickerView.selectedRow(inComponent: 0)])")
-        print("minute : \(self.minuteArray[timerPickerView.selectedRow(inComponent: 1)])")
-        print("second : \(self.secondArray[timerPickerView.selectedRow(inComponent: 2)])")
+        print(
+            "hour : \(self.hourArray[timerPickerView.selectedRow(inComponent: 0)])"
+        )
+        print(
+            "minute : \(self.minuteArray[timerPickerView.selectedRow(inComponent: 1)])"
+        )
+        print(
+            "second : \(self.secondArray[timerPickerView.selectedRow(inComponent: 2)])"
+        )
+        // 時・分・秒を全て足して秒に変換
+        let hour = self.hourArray[timerPickerView.selectedRow(inComponent: 0)]
+        let minute = self.minuteArray[
+            timerPickerView.selectedRow(inComponent: 1)]
+        let second = self.secondArray[
+            timerPickerView.selectedRow(inComponent: 2)]
+        let totalSecond = hour * 3600 + minute * 60 + second
+        let taskText = self.taskText.text ?? ""
+        // UserDefaultsに保存
+        saveTaskData(taskText: taskText, totalSecond: totalSecond)
+        // モーダルを閉じる
+        self.dismiss(animated: true, completion: nil)
+        guard let presentationController = presentationController else {
+            return
+        }
+        presentationController.delegate?.presentationControllerDidDismiss?(
+            presentationController)
     }
+
+    func saveTaskData(taskText: String, totalSecond: Int) {
+        getTodoData()
+        taskArray.append(
+            Task(taskName: taskText, taskTime: totalSecond, isDone: false))
+        // UserDefaultsに保存する
+        guard
+            let data = try? JSONEncoder().encode(
+                taskArray)
+        else {
+            return
+        }
+        userDefault.set(data, forKey: "todo")
+    }
+
+    func getTodoData() {
+        guard let data = userDefault.data(forKey: "todo"),
+            let taskArray = try? jsonDecoder.decode([Task].self, from: data)
+        else {
+            return
+        }
+        self.taskArray = taskArray
+        print("taskArrayの内容 : ", taskArray)
+    }
+
 }
