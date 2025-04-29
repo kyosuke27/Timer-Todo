@@ -1,14 +1,17 @@
 import Foundation
+import RealmSwift
 
-struct Task: Codable {
+class Task: Object, Codable {
+    // タスクの一意に識別するためのID
+    @objc dynamic var id: String = UUID().uuidString
     // タスク名
-    var taskName: String
+    @objc dynamic var taskName: String = ""
     // タスク時間
     // 秒で管理する
-    var taskTime: Int
+    @objc dynamic var taskTime: Int = 0
     // タスクの完了管理
-    var isDone: Bool
-
+    @objc dynamic var isDone: Bool = false
+    
     // 秒を「00:00:00」へ変換する
     func formattedTime() -> String {
         var formattedString = ""

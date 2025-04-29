@@ -18,7 +18,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6CF401672DB72A5E00D894AB /* Exceptions for "Timer-Todo" folder in "Timer-Todo" target */ = {
+		6CE550632DC097160061C462 /* Exceptions for "Timer-Todo" folder in "Timer-Todo" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -28,10 +28,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6CF401572DB72A5B00D894AB /* Timer-Todo */ = {
+		6CE550512DC097150061C462 /* Timer-Todo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				6CF401672DB72A5E00D894AB /* Exceptions for "Timer-Todo" folder in "Timer-Todo" target */,
+				6CE550632DC097160061C462 /* Exceptions for "Timer-Todo" folder in "Timer-Todo" target */,
 			);
 			path = "Timer-Todo";
 			sourceTree = "<group>";
@@ -53,7 +53,7 @@
 		6CF4014C2DB72A5B00D894AB = {
 			isa = PBXGroup;
 			children = (
-				6CF401572DB72A5B00D894AB /* Timer-Todo */,
+				6CE550512DC097150061C462 /* Timer-Todo */,
 				6CF401562DB72A5B00D894AB /* Products */,
 				B058C7D8F7D3E71BD9194A6D /* Pods */,
 				DA7E141CD81598C6B564B3F7 /* Frameworks */,
@@ -103,7 +103,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				6CF401572DB72A5B00D894AB /* Timer-Todo */,
+				6CE550512DC097150061C462 /* Timer-Todo */,
 			);
 			name = "Timer-Todo";
 			productName = "Timer-Todo";

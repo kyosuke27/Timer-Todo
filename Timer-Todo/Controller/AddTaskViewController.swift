@@ -1,4 +1,5 @@
 import FSCalendar
+import RealmSwift
 import UIKit
 
 class AddTaskViewController: UIViewController, UIPickerViewDelegate,
@@ -98,7 +99,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
             timerPickerView.selectedRow(inComponent: 2)]
         let totalSecond = hour * 3600 + minute * 60 + second
         let taskText = self.taskText.text ?? ""
-        // UserDefaultsに保存
+        // realmへ保存する
         saveTaskData(taskText: taskText, totalSecond: totalSecond)
         // モーダルを閉じる
         self.dismiss(animated: true, completion: nil)
@@ -109,28 +110,23 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
             presentationController)
     }
 
+    // Realmへデータの登録
     func saveTaskData(taskText: String, totalSecond: Int) {
-        getTodoData()
-        taskArray.append(
-            Task(taskName: taskText, taskTime: totalSecond, isDone: false))
-        // UserDefaultsに保存する
-        guard
-            let data = try? JSONEncoder().encode(
-                taskArray)
-        else {
-            return
+        let task = Task()
+        // realmへのデータ登録
+        let realm = try! Realm()
+        try! realm.write {
+            task.taskName = taskText
+            task.taskTime = totalSecond
+            realm.add(task)
         }
-        userDefault.set(data, forKey: "todo")
     }
 
-    func getTodoData() {
-        guard let data = userDefault.data(forKey: "todo"),
-            let taskArray = try? jsonDecoder.decode([Task].self, from: data)
-        else {
-            return
-        }
-        self.taskArray = taskArray
-        print("taskArrayの内容 : ", taskArray)
+    // realmからデータを取得する
+    func getTaskData() {
+        let realm = try! Realm()
+        let result = realm.objects(Task.self)
+        taskArray = Array(result)
     }
 
 }

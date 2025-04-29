@@ -9,5 +9,6 @@ target 'Timer-Todo' do
   pod 'KDCircularProgress'
   pod 'FSCalendar'
   pod 'CalculateCalendarLogic'
+  pod 'RealmSwift', '~>10'
 
 end

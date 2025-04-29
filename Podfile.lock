@@ -2,23 +2,33 @@ PODS:
   - CalculateCalendarLogic (0.8.1)
   - FSCalendar (2.8.4)
   - KDCircularProgress (1.5.4)
+  - Realm (10.54.4):
+    - Realm/Headers (= 10.54.4)
+  - Realm/Headers (10.54.4)
+  - RealmSwift (10.54.4):
+    - Realm (= 10.54.4)
 
 DEPENDENCIES:
   - CalculateCalendarLogic
   - FSCalendar
   - KDCircularProgress
+  - RealmSwift (~> 10)
 
 SPEC REPOS:
   trunk:
     - CalculateCalendarLogic
     - FSCalendar
     - KDCircularProgress
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
   CalculateCalendarLogic: 45ea071add8efe0c30524607d3359eb79de8ba82
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
+  Realm: 8b5cda39a41f17a1734da2f39c6004eb8745587a
+  RealmSwift: 0b4f808fed6898f1f6c26f501f740efd80dff0b4
 
-PODFILE CHECKSUM: 70982ac7377b3d61911f15bec7a4ca9e82d588c7
+PODFILE CHECKSUM: 72b2b1f88f6ff9f0f4107dfce5d3cbce308d24b3
 
 COCOAPODS: 1.16.2

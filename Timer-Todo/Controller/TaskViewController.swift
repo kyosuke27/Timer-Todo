@@ -1,13 +1,14 @@
+import RealmSwift
 import UIKit
 
 class TaskViewController: UIViewController, UITableViewDataSource,
-    UITableViewDelegate,UIAdaptivePresentationControllerDelegate
+    UITableViewDelegate, UIAdaptivePresentationControllerDelegate
 {
     let userDefaults = UserDefaults.standard
     let jsonDecoder = JSONDecoder()
 
     @IBOutlet weak var tableView: UITableView!
-    var task: [Task] = []
+    var tasks: [Task] = []
     // 画面が作成される際に一度だけ
     override func viewDidLoad() {
         tableView.register(
@@ -19,39 +20,38 @@ class TaskViewController: UIViewController, UITableViewDataSource,
         // todoデータの取得
         // UserDefaultsから取得
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        getTodoData()
-    }
-    
-    // モーダルのスワイプ削除とかでのイベント通知
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        getTodoData()
-        tableView.reloadData()
-    }
-    
-    // 再度タスク画面が表示された際に利用
-    override func viewWillAppear(_ animated: Bool) {
-        getTodoData()
-        tableView.reloadData()
-    }
-    
-    // TodoデータをUserDefaultsから取得
-    func getTodoData() {
-        // UserDefaultsから取得
-        guard let data = userDefaults.data(forKey: "todo"),
-            let taskArray = try? jsonDecoder.decode([Task].self, from: data)
-        else {
-            return
-        }
-        task =  taskArray
+        // Realmからデータの取得
+        getTaskData()
 
     }
-    
+
+    // モーダルのスワイプ削除とかでのイベント通知
+    func presentationControllerDidDismiss(
+        _ presentationController: UIPresentationController
+    ) {
+        getTaskData()
+        tableView.reloadData()
+    }
+
+    // 再度タスク画面が表示された際に利用
+    override func viewWillAppear(_ animated: Bool) {
+        getTaskData()
+        tableView.reloadData()
+    }
+
+    // TodoデータをRealmから取得
+    func getTaskData() {
+        let realm = try! Realm()
+        let result = realm.objects(Task.self)
+        tasks = Array(result)
+    }
+
     // UiTableViewSourceデリゲートで実装しなければならないもの
     // セルの個数を指定する部分
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int
     {
-        return task.count
+        return tasks.count
     }
 
     // セルに値を設定する
@@ -61,9 +61,9 @@ class TaskViewController: UIViewController, UITableViewDataSource,
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
-        cell.taskLabel?.text = task[indexPath.row].taskName
-        cell.timerLabel?.text = task[indexPath.row].formattedTime()
-        let uiImage = UIImage(systemName: task[indexPath.row].returnIconName())
+        cell.taskLabel?.text = tasks[indexPath.row].taskName
+        cell.timerLabel?.text = tasks[indexPath.row].formattedTime()
+        let uiImage = UIImage(systemName: tasks[indexPath.row].returnIconName())
         cell.cellLabel?.image = uiImage
 
         return cell
@@ -73,10 +73,18 @@ class TaskViewController: UIViewController, UITableViewDataSource,
     func tableView(
         _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
     ) {
-        // タスクを完了にする
-        task[indexPath.row].isDone = !task[indexPath.row].isDone
-        // セルのリロード
-        tableView.reloadData()
+        // タスクの詳細画面に遷移する
+        let storyboard = UIStoryboard(name: "Task", bundle: nil)
+        let taskDetailViewController =
+            storyboard.instantiateViewController(
+                withIdentifier: "TaskDetailViewController")
+            as! TaskDetailViewController
+        taskDetailViewController.configure(task: tasks[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+        // 遷移処理
+        navigationController?.pushViewController(
+            taskDetailViewController, animated: true)
+
     }
 
     @IBAction func addTaskAction(_ sender: UIButton) {
