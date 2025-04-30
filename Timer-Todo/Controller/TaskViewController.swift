@@ -58,11 +58,21 @@ class TaskViewController: UIViewController, UITableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
+        let task = tasks[indexPath.row]
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
-        cell.taskLabel?.text = tasks[indexPath.row].taskName
-        cell.timerLabel?.text = tasks[indexPath.row].formattedTime()
+        let attributes: [NSAttributedString.Key: Any] = [
+            .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+            .strikethroughColor: UIColor.black,  // 線の色
+        ]
+        let attributed = NSAttributedString(
+            string: task.taskName, attributes: attributes)
+        let attributed2 = NSAttributedString(
+            string: task.formattedTime(), attributes: attributes)
+        cell.taskLabel?.attributedText = attributed
+        cell.timerLabel?.attributedText = attributed2
+
         let uiImage = UIImage(systemName: tasks[indexPath.row].returnIconName())
         cell.cellLabel?.image = uiImage
 
@@ -73,17 +83,22 @@ class TaskViewController: UIViewController, UITableViewDataSource,
     func tableView(
         _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
     ) {
-        // タスクの詳細画面に遷移する
-        let storyboard = UIStoryboard(name: "Task", bundle: nil)
-        let taskDetailViewController =
-            storyboard.instantiateViewController(
-                withIdentifier: "TaskDetailViewController")
-            as! TaskDetailViewController
-        taskDetailViewController.configure(task: tasks[indexPath.row])
-        tableView.deselectRow(at: indexPath, animated: true)
-        // 遷移処理
-        navigationController?.pushViewController(
-            taskDetailViewController, animated: true)
+        let task = tasks[indexPath.row]
+        if !task.isDone {
+            // タスクの詳細画面に遷移する
+            let storyboard = UIStoryboard(name: "Task", bundle: nil)
+            let taskDetailViewController =
+                storyboard.instantiateViewController(
+                    withIdentifier: "TaskDetailViewController")
+                as! TaskDetailViewController
+            taskDetailViewController.configure(task: tasks[indexPath.row])
+            tableView.deselectRow(at: indexPath, animated: true)
+            // 遷移処理
+            navigationController?.pushViewController(
+                taskDetailViewController, animated: true)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
 
     }
 

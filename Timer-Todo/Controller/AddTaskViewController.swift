@@ -52,6 +52,17 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
 
     }
 
+    //    @IBAction func tapCrossIcon(_ sender: UIButton) {
+    //        // モーダルを閉じる
+    //        self.dismiss(animated: true, completion: nil)
+    //    }
+
+    @IBAction func tapXmark(_ sender: UIButton) {
+        // モーダルを閉じる
+        self.dismiss(animated: true, completion: nil)
+
+    }
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return dataList.count
     }

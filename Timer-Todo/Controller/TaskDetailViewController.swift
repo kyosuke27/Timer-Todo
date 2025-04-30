@@ -7,6 +7,7 @@
 
 import Foundation
 import KDCircularProgress
+import RealmSwift
 import UIKit
 
 class TaskDetailViewController: UIViewController {
@@ -16,6 +17,7 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet weak var progressBar: KDCircularProgress!
     var task: Task!
     var timer: Timer?
+    // 残り時間
     var remainingTime: Int = 0
     var previousProgressAmout = 360.0
     override func viewDidLoad() {
@@ -32,19 +34,26 @@ class TaskDetailViewController: UIViewController {
         progressBar.glowMode = .constant
     }
     @IBAction func StartButtonAction(_ sender: UIButton) {
-        if timer?.isValid ?? false {
-            timer?.invalidate()
-            timerButton.setTitle("スタート", for: .normal)
-        } else {
-            // Timerの減少スタート
-            timer = Timer.scheduledTimer(
-                timeInterval: 1,
-                target: self,
-                selector: #selector(decreaseTimer),
-                userInfo: nil,
-                repeats: true)
-            timerButton.setTitle("ストップ", for: .normal)
+        print("remainingTime: \(remainingTime)")
+        if remainingTime > 0 {
+            if timer?.isValid ?? false {
+                timer?.invalidate()
+                timerButton.setTitle("スタート", for: .normal)
+            } else {
+                // Timerの減少スタート
+                timer = Timer.scheduledTimer(
+                    timeInterval: 1,
+                    target: self,
+                    selector: #selector(decreaseTimer),
+                    userInfo: nil,
+                    repeats: true)
+                timerButton.setTitle("ストップ", for: .normal)
 
+            }
+        } else {
+            // タスク完了ボタンの際の処理
+            // タスクの完了フラグの更新
+            self.dismiss(animated: true, completion: nil)
         }
     }
 
@@ -52,13 +61,25 @@ class TaskDetailViewController: UIViewController {
     @objc func decreaseTimer() {
         // Timerの減少
         remainingTime -= 1
+        print("remainingTime: \(remainingTime)")
         if remainingTime <= 0 {
+            // タスクの完了処理を行う
+            timerButton.setTitle("タスク完了", for: .normal)
             timer?.invalidate()
             remainingTime = 0
+            progressBar.animate(
+                fromAngle: progressBar.angle,
+                toAngle: 0,
+                duration: 0,
+                completion: nil)
+            // remainingTimeは0を想定する
+            updateTask(totalTime: remainingTime, isDone: true)
+            // 残り時間が0以下になった際にはプログレスバーの減少処理を行わない
+        } else {
+            updateProgressBar()
         }
         timerLabel.text = TimerUtil.convertTimerToFormatString(
             timeSeconds: remainingTime)
-        updateProgressBar()
     }
 
     func updateProgressBar() {
@@ -75,5 +96,15 @@ class TaskDetailViewController: UIViewController {
 
     func configure(task: Task) {
         self.task = task
+    }
+
+    func updateTask(totalTime: Int, isDone: Bool) {
+        // realmへのデータ登録
+        let realm = try! Realm()
+        try! realm.write {
+            task.taskTime = totalTime
+            task.isDone = isDone
+            realm.add(task)
+        }
     }
 }
