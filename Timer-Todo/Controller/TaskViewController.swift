@@ -62,23 +62,34 @@ class TaskViewController: UIViewController, UITableViewDataSource,
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
-        let attributes: [NSAttributedString.Key: Any] = [
-            .strikethroughStyle: NSUnderlineStyle.single.rawValue,
-            .strikethroughColor: UIColor.black,  // 線の色
-        ]
-        let attributed = NSAttributedString(
-            string: task.taskName, attributes: attributes)
-        let attributed2 = NSAttributedString(
-            string: task.formattedTime(), attributes: attributes)
-        cell.taskLabel?.attributedText = attributed
-        cell.timerLabel?.attributedText = attributed2
+        if task.isDone {
+            // タスクは完了しているので、タスクに対して線を引いて完了にする
+            cell.taskLabel?.attributedText = strikeThroughText(
+                text: task.taskName)
+            cell.timerLabel?.attributedText = strikeThroughText(
+                text: task.formattedTime())
 
+        } else {
+            // タスク未完了の場合、普通に表示
+            cell.taskLabel?.text = task.taskName
+            cell.timerLabel?.text = task.formattedTime()
+        }
         let uiImage = UIImage(systemName: tasks[indexPath.row].returnIconName())
         cell.cellLabel?.image = uiImage
 
         return cell
     }
 
+    // attributeText
+    func strikeThroughText(text: String) -> NSAttributedString {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+            .strikethroughColor: UIColor.black,  // 線の色
+        ]
+        return NSAttributedString(
+            string: text, attributes: attributes)
+
+    }
     // セルタップ時の処理
     func tableView(
         _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
