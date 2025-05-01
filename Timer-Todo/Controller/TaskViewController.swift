@@ -59,22 +59,26 @@ class TaskViewController: UIViewController, UITableViewDataSource,
         -> UITableViewCell
     {
         let task = tasks[indexPath.row]
+        var uiImage = UIImage(systemName: task.returnIconName())
+        print("task.taskname\(task.taskName)")
+        print("task.taskname\(task.isDone)")
+        print("=====================================")
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
         if task.isDone {
-            // タスクは完了しているので、タスクに対して線を引いて完了にする
+           // タスクは完了しているので、タスクに対して線を引いて完了にする
             cell.taskLabel?.attributedText = strikeThroughText(
                 text: task.taskName)
             cell.timerLabel?.attributedText = strikeThroughText(
                 text: task.formattedTime())
+            uiImage = UIImage(systemName: tasks[indexPath.row].returnIconName())
 
         } else {
             // タスク未完了の場合、普通に表示
             cell.taskLabel?.text = task.taskName
             cell.timerLabel?.text = task.formattedTime()
         }
-        let uiImage = UIImage(systemName: tasks[indexPath.row].returnIconName())
         cell.cellLabel?.image = uiImage
 
         return cell
