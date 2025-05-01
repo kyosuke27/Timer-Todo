@@ -60,9 +60,6 @@ class TaskViewController: UIViewController, UITableViewDataSource,
     {
         let task = tasks[indexPath.row]
         var uiImage = UIImage(systemName: task.returnIconName())
-        print("task.taskname\(task.taskName)")
-        print("task.taskname\(task.isDone)")
-        print("=====================================")
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
