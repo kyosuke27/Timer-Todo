@@ -1,8 +1,8 @@
 import RealmSwift
 import UIKit
 
-class TaskViewController: UIViewController, UITableViewDataSource,
-    UITableViewDelegate, UIAdaptivePresentationControllerDelegate
+class TaskViewController: UIViewController,
+    UIAdaptivePresentationControllerDelegate
 {
     let userDefaults = UserDefaults.standard
     let jsonDecoder = JSONDecoder()
@@ -39,48 +39,6 @@ class TaskViewController: UIViewController, UITableViewDataSource,
         tableView.reloadData()
     }
 
-    // TodoデータをRealmから取得
-    func getTaskData() {
-        let realm = try! Realm()
-        let result = realm.objects(Task.self)
-        tasks = Array(result)
-    }
-
-    // UiTableViewSourceデリゲートで実装しなければならないもの
-    // セルの個数を指定する部分
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
-        -> Int
-    {
-        return tasks.count
-    }
-
-    // セルに値を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
-        -> UITableViewCell
-    {
-        let task = tasks[indexPath.row]
-        var uiImage = UIImage(systemName: task.returnIconName())
-        let cell =
-            tableView.dequeueReusableCell(
-                withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
-        if task.isDone {
-           // タスクは完了しているので、タスクに対して線を引いて完了にする
-            cell.taskLabel?.attributedText = strikeThroughText(
-                text: task.taskName)
-            cell.timerLabel?.attributedText = strikeThroughText(
-                text: task.formattedTime())
-            uiImage = UIImage(systemName: tasks[indexPath.row].returnIconName())
-
-        } else {
-            // タスク未完了の場合、普通に表示
-            cell.taskLabel?.text = task.taskName
-            cell.timerLabel?.text = task.formattedTime()
-        }
-        cell.cellLabel?.image = uiImage
-
-        return cell
-    }
-
     // attributeText
     func strikeThroughText(text: String) -> NSAttributedString {
         let attributes: [NSAttributedString.Key: Any] = [
@@ -89,28 +47,6 @@ class TaskViewController: UIViewController, UITableViewDataSource,
         ]
         return NSAttributedString(
             string: text, attributes: attributes)
-
-    }
-    // セルタップ時の処理
-    func tableView(
-        _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
-    ) {
-        let task = tasks[indexPath.row]
-        if !task.isDone {
-            // タスクの詳細画面に遷移する
-            let storyboard = UIStoryboard(name: "Task", bundle: nil)
-            let taskDetailViewController =
-                storyboard.instantiateViewController(
-                    withIdentifier: "TaskDetailViewController")
-                as! TaskDetailViewController
-            taskDetailViewController.configure(task: tasks[indexPath.row])
-            tableView.deselectRow(at: indexPath, animated: true)
-            // 遷移処理
-            navigationController?.pushViewController(
-                taskDetailViewController, animated: true)
-        } else {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
 
     }
 
@@ -134,4 +70,112 @@ class TaskViewController: UIViewController, UITableViewDataSource,
 
     }
 
+}
+
+// MARK: - Realm関係
+extension TaskViewController {
+    // realm関係
+    // Todoデータ取得
+    // deleteFlagがtrueのものは除外する
+    func getTaskData() {
+        let realm = try! Realm()
+        // trueのものは除外
+        let result = realm.objects(Task.self).filter { !$0.deleteFlag }.map {
+            $0
+        }
+        tasks = Array(result)
+    }
+
+    // 削除処理
+    func deleteTask(indexPath: IndexPath) {
+        let task = tasks[indexPath.row]
+        let realm = try! Realm()
+        try! realm.write {
+            // 論理削除
+            task.deleteFlag = true
+        }
+        tasks.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension TaskViewController: UITableViewDelegate {
+    // セルのスライド削除機能をつける
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        // 削除スワイプ処理
+        let deleteAction = UIContextualAction(style: .normal, title: "削除") {
+            (action, view, completionHandler) in
+            // 論理削除処理
+            self.deleteTask(indexPath: indexPath)
+            completionHandler(true)
+        }
+        // ボタンの色を設定
+        deleteAction.backgroundColor = .red
+        deleteAction.image = UIImage(systemName: "trash")
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    // セルタップ時の処理
+    func tableView(
+        _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
+    ) {
+        let task = tasks[indexPath.row]
+        if !task.isDone {
+            // タスクの詳細画面に遷移する
+            let storyboard = UIStoryboard(name: "Task", bundle: nil)
+            let taskDetailViewController =
+                storyboard.instantiateViewController(
+                    withIdentifier: "TaskDetailViewController")
+                as! TaskDetailViewController
+            taskDetailViewController.configure(task: tasks[indexPath.row])
+            tableView.deselectRow(at: indexPath, animated: true)
+            // 遷移処理
+            navigationController?.pushViewController(
+                taskDetailViewController, animated: true)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension TaskViewController: UITableViewDataSource {
+    // UiTableViewSourceデリゲートで実装しなければならないもの
+    // セルの個数を指定する部分
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
+        -> Int
+    {
+        return tasks.count
+    }
+
+    // セルに値を設定する
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
+        let task = tasks[indexPath.row]
+        var uiImage = UIImage(systemName: task.returnIconName())
+        let cell =
+            tableView.dequeueReusableCell(
+                withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
+        if task.isDone {
+            // タスクは完了しているので、タスクに対して線を引いて完了にする
+            cell.taskLabel?.attributedText = strikeThroughText(
+                text: task.taskName)
+            cell.timerLabel?.attributedText = strikeThroughText(
+                text: task.formattedTime())
+            uiImage = UIImage(
+                systemName: tasks[indexPath.row].returnIconName())
+
+        } else {
+            // タスク未完了の場合、普通に表示
+            cell.taskLabel?.text = task.taskName
+            cell.timerLabel?.text = task.formattedTime()
+        }
+        cell.cellLabel?.image = uiImage
+        return cell
+    }
 }
