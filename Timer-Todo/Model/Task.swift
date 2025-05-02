@@ -11,8 +11,10 @@ class Task: Object, Codable {
     @objc dynamic var taskTime: Int = 0
     // タスクの完了管理
     @objc dynamic var isDone: Bool = false
-    
+    // 論理削除フラグ
     @objc dynamic var deleteFlag: Bool = false
+    // タスクの登録日
+    @objc dynamic var registerDate: Date = Date()
     
     // 秒を「00:00:00」へ変換する
     func formattedTime() -> String {
