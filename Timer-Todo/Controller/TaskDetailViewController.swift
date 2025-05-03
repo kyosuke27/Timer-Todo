@@ -76,7 +76,9 @@ class TaskDetailViewController: UIViewController {
             updateTask(totalTime: remainingTime, isDone: true)
             // タスクの完了ポップアップを出す
             let storyboard = UIStoryboard(name: "Task", bundle: nil)
-            let popupView:PopupViewController = storyboard.instantiateViewController(identifier: "PopupViewController") as! PopupViewController
+            let popupView: PopupViewController =
+                storyboard.instantiateViewController(
+                    identifier: "PopupViewController") as! PopupViewController
             popupView.modalPresentationStyle = .overFullScreen
             popupView.modalTransitionStyle = .crossDissolve
             self.present(popupView, animated: true, completion: nil)
@@ -103,7 +105,10 @@ class TaskDetailViewController: UIViewController {
     func configure(task: Task) {
         self.task = task
     }
+}
 
+// MARK: - Realm
+extension TaskDetailViewController {
     func updateTask(totalTime: Int, isDone: Bool) {
         // realmへのデータ登録
         let realm = try! Realm()
