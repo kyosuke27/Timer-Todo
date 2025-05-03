@@ -74,6 +74,12 @@ class TaskDetailViewController: UIViewController {
                 completion: nil)
             // remainingTimeは0を想定する
             updateTask(totalTime: remainingTime, isDone: true)
+            // タスクの完了ポップアップを出す
+            let storyboard = UIStoryboard(name: "Task", bundle: nil)
+            let popupView:PopupViewController = storyboard.instantiateViewController(identifier: "PopupViewController") as! PopupViewController
+            popupView.modalPresentationStyle = .overFullScreen
+            popupView.modalTransitionStyle = .crossDissolve
+            self.present(popupView, animated: true, completion: nil)
             // 残り時間が0以下になった際にはプログレスバーの減少処理を行わない
         } else {
             updateProgressBar()
