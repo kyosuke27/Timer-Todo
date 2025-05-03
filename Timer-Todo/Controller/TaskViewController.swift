@@ -79,8 +79,23 @@ extension TaskViewController {
     // deleteFlagがtrueのものは除外する
     func getTaskData() {
         let realm = try! Realm()
-        // trueのものは除外
-        let result = realm.objects(Task.self).filter { !$0.deleteFlag }.map {
+        // 当日の日付
+        let now = Date()
+        let startDay = Calendar.current.startOfDay(for: now)
+
+        // 翌日の00:00:00
+        guard let endDay = Calendar.current.date(
+            byAdding: .day, value: 1, to: startDay)
+        else {
+            return
+        }
+        // 一旦全部出力
+        let result1 = realm.objects(Task.self)
+        // 登録日付を本日かつ、論理削除false
+        let result = realm.objects(Task.self).filter(
+            "registerDate >= %@ AND registerDate < %@ AND deleteFlag == false",
+            startDay, endDay
+        ).map {
             $0
         }
         tasks = Array(result)
