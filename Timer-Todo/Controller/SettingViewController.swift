@@ -18,6 +18,11 @@ class SettingViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        // Theme colorの取り出し
+        let themeColorType = UserDefaults.standard.integer(
+            forKey: "themeKeyColor")
+        let themeColor = ThemeColor(rawValue: themeColorType) ?? .default
+        setThemeColor(type: themeColor)
     }
 }
 
@@ -101,22 +106,15 @@ extension SettingViewController: UITableViewDelegate {
     func setThemeColor(type: ThemeColor) {
         setTabTheme(type: type)
         setNavigationTheme(type: type)
+        saveThemeColor(type: type)
     }
 
     // タブバーの色を変更する
     func setTabTheme(type: ThemeColor) {
-        let appearance = UITabBarAppearance()
-        appearance.backgroundColor = type.color
-        // icon色の変更を行う
-        let isDefault = type == .default
-        let unselectedColor: UIColor = isDefault ? .gray : .white
-        appearance.stackedLayoutAppearance.normal.iconColor = unselectedColor
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
-            .foregroundColor: unselectedColor
-        ]
-        // タブバーの色を変更する
-        tabBarController?.tabBar.scrollEdgeAppearance = appearance
-        tabBarController?.tabBar.standardAppearance = appearance
+        // タブバーのコントローラーを取得してテーマカラーの変更を行う
+        if let myTab = self.tabBarController as? TaskTabController {
+            myTab.setThemeColor(type: type)
+        }
 
     }
 
@@ -125,6 +123,10 @@ extension SettingViewController: UITableViewDelegate {
         // ナビゲーションバーの背景色を変更
         navigationController?.navigationBar.scrollEdgeAppearance?
             .backgroundColor = type.color
+    }
+
+    func saveThemeColor(type: ThemeColor) {
+        UserDefaults.standard.setValue(type.rawValue, forKey: "themeKeyColor")
     }
 
 }
