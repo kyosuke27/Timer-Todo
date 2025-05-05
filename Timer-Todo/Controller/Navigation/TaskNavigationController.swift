@@ -19,8 +19,7 @@ class TaskNavigationController: UINavigationController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        let themeColorType = UserDefaults.standard.integer(
-            forKey: "themeKeyColor")
+        let themeColorType = TaskUserDefaults.getThemeColor()
         let themeColor = ThemeColor(rawValue: themeColorType) ?? .default
         setNavigationTheme(type: themeColor)
 

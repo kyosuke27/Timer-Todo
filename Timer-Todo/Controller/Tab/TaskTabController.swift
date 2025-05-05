@@ -15,7 +15,6 @@ class TaskTabController: UITabBarController {
     }
 
     func initTab() {
-        print("initTab")
         let themeColorType = UserDefaults.standard.integer(
             forKey: "themeKeyColor")
         let themeColor = ThemeColor(rawValue: themeColorType) ?? .default
@@ -36,9 +35,16 @@ class TaskTabController: UITabBarController {
         // icon色の変更を行う
         let isDefault = type == .default
         let unselectedColor: UIColor = isDefault ? .gray : .white
+        let selectedColor: UIColor = isDefault ? .systemMint : .green
+        // アイコンのデフォルト色を設定
         appearance.stackedLayoutAppearance.normal.iconColor = unselectedColor
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
             .foregroundColor: unselectedColor
+        ]
+        // アイコンの選択時の色を設定
+        appearance.stackedLayoutAppearance.selected.iconColor = selectedColor
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .foregroundColor: selectedColor
         ]
         // タブバーの色を変更する
         tabBar.scrollEdgeAppearance = appearance
