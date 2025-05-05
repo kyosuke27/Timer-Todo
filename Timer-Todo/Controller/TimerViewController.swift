@@ -9,10 +9,16 @@ import UIKit
 
 class TimerViewController: UIViewController{
     @IBOutlet weak var timerText: UILabel!
+    @IBOutlet weak var timerDate: UILabel!
     var timer:Timer!
     var date:Date!
     
     override func viewDidLoad() {
+        let data = Date()
+        // YYYY/MM/DDの形式で表示
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        timerDate.text = formatter.string(from: data)
         timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
