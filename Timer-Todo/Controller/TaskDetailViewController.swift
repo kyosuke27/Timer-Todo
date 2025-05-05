@@ -35,9 +35,12 @@ class TaskDetailViewController: UIViewController {
     }
     @IBAction func StartButtonAction(_ sender: UIButton) {
         if remainingTime > 0 {
+            // タイマーが起動している場合には停止する
+            // 条件：タイマーが起動している
             if timer?.isValid ?? false {
                 timer?.invalidate()
                 timerButton.setTitle("スタート", for: .normal)
+                updateTask(totalTime: remainingTime, isDone: false)
             } else {
                 // Timerの減少スタート
                 timer = Timer.scheduledTimer(
