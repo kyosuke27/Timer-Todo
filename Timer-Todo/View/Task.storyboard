@@ -255,19 +255,21 @@
         <!--Item-->
         <scene sceneID="3n9-Wv-lcp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wNH-m1-9uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Id6-20-uZY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="square.and.arrow.down" catalog="system" id="XGL-Nw-1ts"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VPd-Eh-D3D">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance"/>
+                        <navigationBarAppearance key="scrollEdgeAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="IcX-t9-mlM"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wNH-m1-9uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="11.450381679389313" y="-55.633802816901408"/>
         </scene>

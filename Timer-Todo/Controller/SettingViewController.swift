@@ -75,7 +75,7 @@ extension SettingViewController: UITableViewDelegate {
             let blue = UIAlertAction(
                 title: "ブルー", style: .default,
                 handler: { _ -> Void in
-                    print("selected blue color")
+                    self.setThemeColor(type: .blue)
                 })
 
             let cancelColor = UIAlertAction(
@@ -85,10 +85,19 @@ extension SettingViewController: UITableViewDelegate {
             let alert = UIAlertController(
                 title: "テーマカラーの選択", message: "", preferredStyle: .actionSheet)
             alert.addAction(defaultColor)
+            alert.addAction(blue)
             alert.addAction(cancelColor)
             present(alert, animated: true)
 
         } else if indexPath.row == 1 {
         }
+    }
+
+    func setThemeColor(type: ThemeColor) {
+        print("setThemeColor")
+        print("type: \(type)")
+        // ナビゲーションバーの背景色を変更
+        navigationController?.navigationBar.scrollEdgeAppearance?
+            .backgroundColor = type.color
     }
 }
