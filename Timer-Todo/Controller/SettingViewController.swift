@@ -45,8 +45,6 @@ extension SettingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
-        print("cellForRowAt")
-        print("indexPath.section: \(indexPath.section)")
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "SettingCell", for: indexPath)
         cell.textLabel?.text = sectionData[indexPath.section][indexPath.row]
@@ -70,12 +68,17 @@ extension SettingViewController: UITableViewDelegate {
             let defaultColor = UIAlertAction(
                 title: "デフォルト", style: .default,
                 handler: { _ -> Void in
-                    print("selected defalut color")
+                    self.setThemeColor(type: .default)
                 })
             let blue = UIAlertAction(
                 title: "ブルー", style: .default,
                 handler: { _ -> Void in
                     self.setThemeColor(type: .blue)
+                })
+            let red = UIAlertAction(
+                title: "レッド", style: .default,
+                handler: { _ -> Void in
+                    self.setThemeColor(type: .red)
                 })
 
             let cancelColor = UIAlertAction(
@@ -86,6 +89,7 @@ extension SettingViewController: UITableViewDelegate {
                 title: "テーマカラーの選択", message: "", preferredStyle: .actionSheet)
             alert.addAction(defaultColor)
             alert.addAction(blue)
+            alert.addAction(red)
             alert.addAction(cancelColor)
             present(alert, animated: true)
 
@@ -93,11 +97,34 @@ extension SettingViewController: UITableViewDelegate {
         }
     }
 
+    // テーマの変更
     func setThemeColor(type: ThemeColor) {
-        print("setThemeColor")
-        print("type: \(type)")
+        setTabTheme(type: type)
+        setNavigationTheme(type: type)
+    }
+
+    // タブバーの色を変更する
+    func setTabTheme(type: ThemeColor) {
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = type.color
+        // icon色の変更を行う
+        let isDefault = type == .default
+        let unselectedColor: UIColor = isDefault ? .gray : .white
+        appearance.stackedLayoutAppearance.normal.iconColor = unselectedColor
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+            .foregroundColor: unselectedColor
+        ]
+        // タブバーの色を変更する
+        tabBarController?.tabBar.scrollEdgeAppearance = appearance
+        tabBarController?.tabBar.standardAppearance = appearance
+
+    }
+
+    // ナビゲーションバーの色を変更する
+    func setNavigationTheme(type: ThemeColor) {
         // ナビゲーションバーの背景色を変更
         navigationController?.navigationBar.scrollEdgeAppearance?
             .backgroundColor = type.color
     }
+
 }

@@ -34,7 +34,6 @@ class TaskDetailViewController: UIViewController {
         progressBar.glowMode = .constant
     }
     @IBAction func StartButtonAction(_ sender: UIButton) {
-        print("remainingTime: \(remainingTime)")
         if remainingTime > 0 {
             if timer?.isValid ?? false {
                 timer?.invalidate()
@@ -61,7 +60,6 @@ class TaskDetailViewController: UIViewController {
     @objc func decreaseTimer() {
         // Timerの減少
         remainingTime -= 1
-        print("remainingTime: \(remainingTime)")
         if remainingTime <= 0 {
             // タスクの完了処理を行う
             timerButton.setTitle("タスク完了", for: .normal)

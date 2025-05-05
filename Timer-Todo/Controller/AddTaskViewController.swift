@@ -52,7 +52,6 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
 
     }
 
-    
     @IBAction func tapXmark(_ sender: UIButton) {
         // モーダルを閉じる
         self.dismiss(animated: true, completion: nil)
@@ -89,15 +88,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
 
     @IBAction func registerTaskAction(_ sender: UIButton) {
         // Timerの値
-        print(
-            "hour : \(self.hourArray[timerPickerView.selectedRow(inComponent: 0)])"
-        )
-        print(
-            "minute : \(self.minuteArray[timerPickerView.selectedRow(inComponent: 1)])"
-        )
-        print(
-            "second : \(self.secondArray[timerPickerView.selectedRow(inComponent: 2)])"
-        )
+
         // 時・分・秒を全て足して秒に変換
         let hour = self.hourArray[timerPickerView.selectedRow(inComponent: 0)]
         let minute = self.minuteArray[
