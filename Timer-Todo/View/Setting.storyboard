@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="1391.6030534351144" y="-43.661971830985919"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Task Navigation Controller-->
         <scene sceneID="wnj-Fc-V0T">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3kW-GA-tqd" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3kW-GA-tqd" customClass="TaskNavigationController" customModule="Timer_Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wbd-M0-EM5">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>

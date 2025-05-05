@@ -255,7 +255,7 @@
         <!--Item-->
         <scene sceneID="3n9-Wv-lcp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Id6-20-uZY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Id6-20-uZY" customClass="TaskNavigationController" customModule="Timer_Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="square.and.arrow.down" catalog="system" id="XGL-Nw-1ts"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VPd-Eh-D3D">

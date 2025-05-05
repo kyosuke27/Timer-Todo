@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Task Navigation Controller-->
         <scene sceneID="Stk-1t-bca">
             <objects>
-                <navigationController id="Mr6-cY-Dwc" sceneMemberID="viewController">
+                <navigationController id="Mr6-cY-Dwc" customClass="TaskNavigationController" customModule="Timer_Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ICh-hy-bXM">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

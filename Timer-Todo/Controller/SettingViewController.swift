@@ -121,8 +121,12 @@ extension SettingViewController: UITableViewDelegate {
     // ナビゲーションバーの色を変更する
     func setNavigationTheme(type: ThemeColor) {
         // ナビゲーションバーの背景色を変更
-        navigationController?.navigationBar.scrollEdgeAppearance?
-            .backgroundColor = type.color
+        if let navigationBar = self.navigationController
+            as? TaskNavigationController
+        {
+            navigationBar.setNavigationTheme(type: type)
+        }
+
     }
 
     func saveThemeColor(type: ThemeColor) {
