@@ -84,20 +84,23 @@ extension TaskViewController {
         let startDay = Calendar.current.startOfDay(for: now)
 
         // 翌日の00:00:00
-        guard let endDay = Calendar.current.date(
-            byAdding: .day, value: 1, to: startDay)
+        guard
+            let endDay = Calendar.current.date(
+                byAdding: .day, value: 1, to: startDay)
         else {
             return
         }
         // 一旦全部出力
         let result1 = realm.objects(Task.self)
         // 登録日付を本日かつ、論理削除false
+        // isDoneで並べ替える
         let result = realm.objects(Task.self).filter(
             "registerDate >= %@ AND registerDate < %@ AND deleteFlag == false",
             startDay, endDay
-        ).map {
-            $0
-        }
+        ).sorted(byKeyPath: "isDone", ascending: true)
+            .map {
+                $0
+            }
         tasks = Array(result)
     }
 
@@ -176,6 +179,7 @@ extension TaskViewController: UITableViewDataSource {
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "TaskCellView", for: indexPath) as! TaskCell
+        
         if task.isDone {
             // タスクは完了しているので、タスクに対して線を引いて完了にする
             cell.taskLabel?.attributedText = strikeThroughText(
@@ -186,6 +190,8 @@ extension TaskViewController: UITableViewDataSource {
                 systemName: tasks[indexPath.row].returnIconName())
 
         } else {
+            cell.taskLabel?.attributedText = nil
+            cell.timerLabel?.attributedText = nil
             // タスク未完了の場合、普通に表示
             cell.taskLabel?.text = task.taskName
             cell.timerLabel?.text = task.formattedTime()
