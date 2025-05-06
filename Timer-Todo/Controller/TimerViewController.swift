@@ -7,18 +7,18 @@
 
 import UIKit
 
-class TimerViewController: UIViewController{
+class TimerViewController: UIViewController {
     @IBOutlet weak var timerText: UILabel!
     @IBOutlet weak var timerDate: UILabel!
-    var timer:Timer!
-    var date:Date!
-    
+    var timer: Timer!
+    var date: Date!
+
     override func viewDidLoad() {
-        let data = Date()
-        // YYYY/MM/DDの形式で表示
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        timerDate.text = formatter.string(from: data)
+        let date = Date()
+        timerDate.text = TimerUtil.convertDateToDisplayFormat(date: date)
+        // タイマーの初期化
+        timerText.text = TimerUtil.convertDateToTimerDisplayFormat(date: date)
+        // タイマーの設定
         timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
@@ -26,13 +26,26 @@ class TimerViewController: UIViewController{
             userInfo: nil,
             repeats: true)
     }
-    
-    @objc func updateTimer(){
+
+    @objc func updateTimer() {
         date = Date()
-        timerText.text = String(
-            format: "%02d:%02d:%02d",
-            Calendar.current.component(.hour, from: date),
-            Calendar.current.component(.minute, from: date),
-            Calendar.current.component(.second, from: date))
+        timerText.text = TimerUtil.convertDateToTimerDisplayFormat(date: date)
+    }
+    // 画面を離れる際にTimerを破棄
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer.invalidate()
+    }
+
+    // 画面を戻る際にTimerを再設定
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // タイマーの設定
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateTimer),
+            userInfo: nil,
+            repeats: true)
     }
 }
