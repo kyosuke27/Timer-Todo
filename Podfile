@@ -10,5 +10,6 @@ target 'Timer-Todo' do
   pod 'FSCalendar'
   pod 'CalculateCalendarLogic'
   pod 'RealmSwift', '~>10'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon', :branch => 'swift5'
 
 end

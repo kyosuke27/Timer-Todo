@@ -256,7 +256,7 @@
         <scene sceneID="3n9-Wv-lcp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Id6-20-uZY" customClass="TaskNavigationController" customModule="Timer_Todo" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="square.and.arrow.down" catalog="system" id="XGL-Nw-1ts"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Task" selectedImage="Task" id="XGL-Nw-1ts"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VPd-Eh-D3D">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -275,7 +275,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="square.and.arrow.down" catalog="system" width="114" height="128"/>
+        <image name="Task" width="25" height="25"/>
         <namedColor name="StartButtonColor">
             <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

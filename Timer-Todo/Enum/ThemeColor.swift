@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import ChameleonFramework
 
 enum ThemeColor: Int {
     case `default`
@@ -11,9 +12,8 @@ enum ThemeColor: Int {
         // それぞれの色を選択した値から取得する
         switch self {
         case .default: return .white
-        case .red: return UIColor.rgba(red: 210, green: 65, blue: 65, alpha: 1)
-        case .blue:
-            return UIColor.rgba(red: 65, green: 135, blue: 250, alpha: 1)
+        case .red: return UIColor.flatRed()
+        case .blue: return UIColor.flatSkyBlue()
         }
     }
 }

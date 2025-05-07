@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Setting View Controller-->
+        <!--設定-->
         <scene sceneID="ZVA-Lm-Pzk">
             <objects>
                 <tableViewController id="FVb-8b-XBD" customClass="SettingViewController" customModule="Timer_Todo" customModuleProvider="target" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                             <outlet property="delegate" destination="FVb-8b-XBD" id="B9A-Xs-vsQ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="eHx-cu-U7y"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="Gear" selectedImage="Gear" id="eHx-cu-U7y"/>
                     <navigationItem key="navigationItem" id="7UX-gf-JfG"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -61,4 +61,7 @@
             <point key="canvasLocation" x="464.8854961832061" y="-43.661971830985919"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Gear" width="85.333335876464844" height="85.333335876464844"/>
+    </resources>
 </document>

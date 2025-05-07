@@ -80,7 +80,7 @@
                             <constraint firstItem="fmK-v2-Au2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="80" id="sD8-uz-Ef3"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="square.and.arrow.up" catalog="system" id="xvr-TB-Y84"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Timer" selectedImage="Timer" id="xvr-TB-Y84"/>
                     <navigationItem key="navigationItem" id="cQE-fw-R9c"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -94,7 +94,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
+        <image name="Timer" width="25" height="25"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
