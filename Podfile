@@ -6,10 +6,11 @@ target 'Timer-Todo' do
   use_frameworks!
 
   # Pods for Timer-Todo
-  pod 'KDCircularProgress'
-  pod 'FSCalendar'
-  pod 'CalculateCalendarLogic'
+  pod 'KDCircularProgress', '~>10'
+  pod 'FSCalendar', '~>10'
+  pod 'CalculateCalendarLogic', '~>10'
   pod 'RealmSwift', '~>10'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon', :branch => 'swift5'
+  pod 'Onboard', '~>10'
 
 end

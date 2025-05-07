@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-BA-tee" userLabel="TaskTable">
-                                <rect key="frame" x="0.0" y="59" width="393" height="642"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Uec-BA-tee" userLabel="TaskTable">
+                                <rect key="frame" x="0.0" y="59" width="393" height="637"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" textLabel="rtK-T8-qxt" style="IBUITableViewCellStyleDefault" id="97X-sm-7Xk">
@@ -46,12 +45,15 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="vpH-DG-Kod"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2Y-hh-iL3">
-                                <rect key="frame" x="145" y="709" width="104" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.90142278641956397" blue="0.93647411616161613" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2Y-hh-iL3">
+                                <rect key="frame" x="100" y="704" width="193" height="40"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="If8-eF-CIQ"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="+ AddTask">
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system" title=" Add Task">
                                     <color key="baseForegroundColor" systemColor="tintColor"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
@@ -66,6 +68,17 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Uec-BA-tee" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="5Uy-u8-DzW"/>
+                            <constraint firstItem="T2Y-hh-iL3" firstAttribute="top" secondItem="Uec-BA-tee" secondAttribute="bottom" constant="8" id="82Q-Ke-h3b"/>
+                            <constraint firstItem="T2Y-hh-iL3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="LxU-wp-3k2"/>
+                            <constraint firstItem="Uec-BA-tee" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" constant="-44" id="Mzm-ks-SDR"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="T2Y-hh-iL3" secondAttribute="trailing" constant="100" id="Nma-Ad-oyi"/>
+                            <constraint firstItem="T2Y-hh-iL3" firstAttribute="top" secondItem="Uec-BA-tee" secondAttribute="bottom" constant="8" symbolic="YES" id="XQv-Gb-raa"/>
+                            <constraint firstItem="T2Y-hh-iL3" firstAttribute="centerX" secondItem="Uec-BA-tee" secondAttribute="centerX" id="m8K-fm-IMu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="T2Y-hh-iL3" secondAttribute="bottom" constant="25" id="nMP-fC-UbI"/>
+                            <constraint firstItem="Uec-BA-tee" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="zEd-gi-4c4"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eEh-c1-xLy"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -276,6 +289,7 @@
     </scenes>
     <resources>
         <image name="Task" width="25" height="25"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="StartButtonColor">
             <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -5,6 +5,7 @@ PODS:
     - ChameleonFramework/Default
   - FSCalendar (2.8.4)
   - KDCircularProgress (1.5.4)
+  - Onboard (2.3.3)
   - Realm (10.54.4):
     - Realm/Headers (= 10.54.4)
   - Realm/Headers (10.54.4)
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon`, branch `swift5`)
   - FSCalendar
   - KDCircularProgress
+  - Onboard
   - RealmSwift (~> 10)
 
 SPEC REPOS:
@@ -23,6 +25,7 @@ SPEC REPOS:
     - CalculateCalendarLogic
     - FSCalendar
     - KDCircularProgress
+    - Onboard
     - Realm
     - RealmSwift
 
@@ -41,9 +44,10 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   KDCircularProgress: 98200c6b8e85d22bc04eb644721d3b1e12b0686b
+  Onboard: 4d6e943e20bdd6bc229df967a347dd7514bc2a6f
   Realm: 8b5cda39a41f17a1734da2f39c6004eb8745587a
   RealmSwift: 0b4f808fed6898f1f6c26f501f740efd80dff0b4
 
-PODFILE CHECKSUM: ebf62e853975ed35fa4bd9491d938254e5c85e96
+PODFILE CHECKSUM: 68b9cc1a5f56ecef27ddaf947dcaeb1dfe28fa28
 
 COCOAPODS: 1.16.2
