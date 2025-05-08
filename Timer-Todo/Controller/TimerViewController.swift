@@ -16,6 +16,12 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         let date = Date()
         timerDate.text = TimerUtil.convertDateToDisplayFormat(date: date)
+        // ダークモードの判定
+        if UITraitCollection.current.userInterfaceStyle == .dark {
+            timerDate.textColor = .black
+        }else{
+            timerDate.textColor = .white
+        }
         // タイマーの初期化
         timerText.text = TimerUtil.convertDateToTimerDisplayFormat(date: date)
         // タイマーの設定

@@ -11,7 +11,7 @@ enum ThemeColor: Int {
     var color: UIColor {
         // それぞれの色を選択した値から取得する
         switch self {
-        case .default: return .white
+        case .default: return UIColor(named: "DefaultColor")!
         case .red: return UIColor.flatRed()
         case .blue: return UIColor.flatSkyBlue()
         }

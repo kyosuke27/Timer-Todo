@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MessageUI
 import UIKit
 
 class SettingViewController: UIViewController {
@@ -48,7 +49,6 @@ extension SettingViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "SettingCell", for: indexPath)
         cell.textLabel?.text = sectionData[indexPath.section][indexPath.row]
-        cell.textLabel?.textColor = .black
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
         cell.textLabel?.textAlignment = .left
         return cell
@@ -62,8 +62,10 @@ extension SettingViewController: UITableViewDelegate {
         _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
     ) {
         tableView.deselectRow(at: indexPath, animated: true)
+        print("タップされたセルのインデックス:\(indexPath.row)")
+        print("タップされたセルのセクション:\(indexPath.section)")
         // テーマカラーの変更がタップされたとき
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && indexPath.section == 0 {
             // alertの作成
             let defaultColor = UIAlertAction(
                 title: "デフォルト", style: .default,
@@ -93,7 +95,10 @@ extension SettingViewController: UITableViewDelegate {
             alert.addAction(cancelColor)
             present(alert, animated: true)
 
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 0 && indexPath.section == 1 {
+            // お問い合わせメール
+            print("go to mail")
+            sendMail()
         }
     }
 
@@ -111,5 +116,42 @@ extension SettingViewController: UITableViewDelegate {
         }
         // UserDefaultsにテーマカラーを保存
         TaskUserDefaults.saveThemeColor(type: type)
+    }
+}
+
+// MARK: - MFMailComposeViewController
+extension SettingViewController: MFMailComposeViewControllerDelegate {
+    func sendMail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            // 宛先
+            mail.setToRecipients(["xxxxx@xxx.xx"])
+            // 件名
+            mail.setSubject("お問い合わせ")
+            present(mail, animated: true, completion: nil)
+        } else {
+            print("メールが送信できません")
+        }
+    }
+
+    // MFMaoilComposeViewControllerDelegateのデリゲートメソッド
+    func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult, error: (any Error)?
+    ) {
+        if let error = error {
+            print("Error: \(error.localizedDescription)")
+        }
+        switch result {
+        case .cancelled:
+            print("メール送信キャンセル")
+        case .saved:
+            print("メール送信保存")
+        case .sent:
+            print("メール送信完了")
+        default:
+            print("メール送信失敗")
+        }
     }
 }

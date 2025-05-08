@@ -55,7 +55,8 @@ class TaskDetailViewController: UIViewController {
         } else {
             // タスク完了ボタンの際の処理
             // タスクの完了フラグの更新
-            self.dismiss(animated: true, completion: nil)
+            // navigationControllerのpushで遷移しているのでpopで戻る
+            navigationController?.popViewController(animated: true)
         }
     }
 
