@@ -126,7 +126,7 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             // 宛先
-            mail.setToRecipients(["xxxxx@xxx.xx"])
+            mail.setToRecipients(["happydevalone@gmail.com"])
             // 件名
             mail.setSubject("お問い合わせ")
             present(mail, animated: true, completion: nil)
