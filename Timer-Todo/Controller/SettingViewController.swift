@@ -153,5 +153,6 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
         default:
             print("メール送信失敗")
         }
+        controller.dismiss(animated: true, completion: nil)
     }
 }
