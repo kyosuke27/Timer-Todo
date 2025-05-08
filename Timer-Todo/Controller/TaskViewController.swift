@@ -22,6 +22,8 @@ class TaskViewController: UIViewController,
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         // Realmからデータの取得
         getTaskData()
+        // NavigationBarのBack文言を変更
+        navigationItem.backButtonTitle = "一覧に戻る"
 
     }
 
@@ -90,8 +92,6 @@ extension TaskViewController {
         else {
             return
         }
-        // 一旦全部出力
-        let result1 = realm.objects(Task.self)
         // 登録日付を本日かつ、論理削除false
         // isDoneで並べ替える
         let result = realm.objects(Task.self).filter(
