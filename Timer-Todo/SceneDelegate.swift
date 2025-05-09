@@ -61,7 +61,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // onboarding
     func createOnboard() {
-        print("onboard")
         // トップオンボーディング画面
         let topPage = OnboardingContentViewController(
             title: "Todyタスクへようこそ！",
@@ -146,7 +145,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             image: UIImage(named: "Setting"), buttonText: "始める",
             action: {
                 // 最後のページなのでメイン画面への遷移
-                print("next")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let homeView =
                     storyboard.instantiateViewController(

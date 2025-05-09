@@ -62,8 +62,6 @@ extension SettingViewController: UITableViewDelegate {
         _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
     ) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("タップされたセルのインデックス:\(indexPath.row)")
-        print("タップされたセルのセクション:\(indexPath.section)")
         // テーマカラーの変更がタップされたとき
         if indexPath.row == 0 && indexPath.section == 0 {
             // alertの作成
@@ -89,6 +87,16 @@ extension SettingViewController: UITableViewDelegate {
 
             let alert = UIAlertController(
                 title: "テーマカラーの選択", message: "", preferredStyle: .actionSheet)
+            // --- ポップオーバー用の表示元を指定 ---
+            if let pop = alert.popoverPresentationController {
+                pop.sourceView = self.view  // 親ビュー
+                pop.sourceRect = CGRect(
+                    x: self.view.bounds.midX,
+                    y: self.view.bounds.midY,
+                    width: 0, height: 0
+                )  // タップ位置や中心など、お好みで
+                pop.permittedArrowDirections = []  // 矢印を不要にするなら
+            }
             alert.addAction(defaultColor)
             alert.addAction(blue)
             alert.addAction(red)
@@ -97,7 +105,6 @@ extension SettingViewController: UITableViewDelegate {
 
         } else if indexPath.row == 0 && indexPath.section == 1 {
             // お問い合わせメール
-            print("go to mail")
             sendMail()
         }
     }

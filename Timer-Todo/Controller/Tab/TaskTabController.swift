@@ -18,7 +18,6 @@ class TaskTabController: UITabBarController {
         let themeColorType = UserDefaults.standard.integer(
             forKey: "themeKeyColor")
         let themeColor = ThemeColor(rawValue: themeColorType) ?? .default
-        print(themeColor)
         setThemeColor(type: themeColor)
     }
 
