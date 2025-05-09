@@ -1,5 +1,6 @@
 import FSCalendar
 import RealmSwift
+import StoreKit
 import UIKit
 
 class AddTaskViewController: UIViewController, UIPickerViewDelegate,
@@ -7,7 +8,6 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
 {
     let userDefault = UserDefaults.standard
     let jsonDecoder = JSONDecoder()
-    var taskArray: [Task] = []
     @IBOutlet weak var timerPickerView: UIPickerView!
     @IBOutlet weak var taskText: UITextField!
 
@@ -99,6 +99,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
         let taskText = self.taskText.text ?? ""
         // realmへ保存する
         saveTaskData(taskText: taskText, totalSecond: totalSecond)
+        checkRequestReview()
         // モーダルを閉じる
         self.dismiss(animated: true, completion: nil)
         guard let presentationController = presentationController else {
@@ -121,10 +122,61 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate,
     }
 
     // realmからデータを取得する
-    func getTaskData() {
+    func getTaskData() -> [Task] {
         let realm = try! Realm()
-        let result = realm.objects(Task.self)
-        taskArray = Array(result)
+        // 当日の日付
+        let now = Date()
+        let startDay = Calendar.current.startOfDay(for: now)
+
+        // 翌日の00:00:00
+        guard
+            let endDay = Calendar.current.date(
+                byAdding: .day, value: 1, to: startDay)
+        else {
+            return []
+        }
+        // 登録日付を本日かつ、論理削除false
+        // isDoneで並べ替える
+        let result = realm.objects(Task.self).filter(
+            "registerDate >= %@ AND registerDate < %@",
+            startDay, endDay
+        )
+        .map {
+            $0
+        }
+        return Array(result)
+    }
+
+    func checkRequestReview() {
+        // レビューリクエストの条件を満たしているか確認
+        // 登録データ数を取得
+        let taskCount = getTaskData().count
+        // レビューリクエストを以前表示させた日付を取得
+        let showDisplayDay =
+            UserDefaults.standard.object(
+                forKey: "AppStoreReviewDate") as? Date
+        // 本日日付
+        let today = Date()
+        // レビューリクエストを表示させた日付がnilか、日付が今日より前かつtaskDataが5件以上だった場合
+        if (showDisplayDay == nil || showDisplayDay! < today) && taskCount > 5 {
+            if let scene = UIApplication.shared.connectedScenes.first
+                as? UIWindowScene
+            {
+                AppStore.requestReview(in: scene)
+                // 本日日付をUserDefaultsに保存
+                // 3ヶ月後の日付を指定
+                let calendar = Calendar.current
+                let threeMonthsLater = calendar.date(
+                    byAdding: .month, value: 3, to: today)
+                let oneSecondsLater = calendar.date(
+                    byAdding: .second, value: 1, to: today)
+                UserDefaults.standard.set(
+                    oneSecondsLater, forKey: "AppStoreReviewDate")
+
+            }
+
+        }
+
     }
 
 }
