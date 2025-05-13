@@ -12,5 +12,5 @@ target 'Timer-Todo' do
   pod 'RealmSwift', '~>10'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon', :branch => 'swift5'
   pod 'Onboard'
-
+  pod 'Google-Mobile-Ads-SDK'
 end
