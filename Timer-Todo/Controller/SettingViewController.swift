@@ -64,45 +64,13 @@ extension SettingViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         // テーマカラーの変更がタップされたとき
         if indexPath.row == 0 && indexPath.section == 0 {
-            // alertの作成
-            let defaultColor = UIAlertAction(
-                title: "デフォルト", style: .default,
-                handler: { _ -> Void in
-                    self.setThemeColor(type: .default)
-                })
-            let blue = UIAlertAction(
-                title: "ブルー", style: .default,
-                handler: { _ -> Void in
-                    self.setThemeColor(type: .blue)
-                })
-            let red = UIAlertAction(
-                title: "レッド", style: .default,
-                handler: { _ -> Void in
-                    self.setThemeColor(type: .red)
-                })
-
-            let cancelColor = UIAlertAction(
-                title: "キャンセル", style: .default,
-                handler: nil)
-
-            let alert = UIAlertController(
-                title: "テーマカラーの選択", message: "", preferredStyle: .actionSheet)
-            // --- ポップオーバー用の表示元を指定 ---
-            if let pop = alert.popoverPresentationController {
-                pop.sourceView = self.view  // 親ビュー
-                pop.sourceRect = CGRect(
-                    x: self.view.bounds.midX,
-                    y: self.view.bounds.midY,
-                    width: 0, height: 0
-                )  // タップ位置や中心など、お好みで
-                pop.permittedArrowDirections = []  // 矢印を不要にするなら
-            }
-            alert.addAction(defaultColor)
-            alert.addAction(blue)
-            alert.addAction(red)
-            alert.addAction(cancelColor)
-            present(alert, animated: true)
-
+            let storyboard = UIStoryboard(name: "ColorTableView", bundle: nil)
+            let colorTableViewController =
+                storyboard.instantiateViewController(
+                    withIdentifier: "ColorTableViewController") as! ColorTableViewController
+            tableView.deselectRow(at: indexPath, animated: true)
+            navigationController?.pushViewController(
+                colorTableViewController, animated: true)
         } else if indexPath.row == 0 && indexPath.section == 1 {
             // お問い合わせメール
             sendMail()
