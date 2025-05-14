@@ -24,6 +24,10 @@ class TaskViewController: UIViewController,
         getTaskData()
         // NavigationBarのBack文言を変更
         navigationItem.backButtonTitle = "一覧に戻る"
+        
+        // tableViewのセルの大きさを可変に
+        tableView.estimatedRowHeight = 66
+        tableView.rowHeight = UITableView.automaticDimension
 
     }
 
@@ -199,4 +203,5 @@ extension TaskViewController: UITableViewDataSource {
         cell.cellLabel?.image = uiImage
         return cell
     }
+    
 }
