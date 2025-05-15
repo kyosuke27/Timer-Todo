@@ -35,57 +35,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aG-Zy-8hB">
-                                <rect key="frame" x="80" y="386" width="233" height="80"/>
-                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FF5-G2-WdH" userLabel="TimerView">
+                                <rect key="frame" x="10" y="83" width="373" height="686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2025/01/01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmK-v2-Au2">
+                                        <rect key="frame" x="70" y="30" width="233" height="60"/>
+                                        <color key="backgroundColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="r68-a8-6w1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="32"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWw-76-jfa">
+                                        <rect key="frame" x="10" y="299.66666666666669" width="353" height="87"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="73"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日の残り時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-XZ-vIR">
+                                        <rect key="frame" x="10" y="416.66666666666669" width="353" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEA-pl-r6h">
+                                        <rect key="frame" x="123.66666666666663" y="477.66666666666663" width="126.00000000000003" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="gWK-Sa-c3C"/>
+                                    <constraint firstItem="fmK-v2-Au2" firstAttribute="top" secondItem="FF5-G2-WdH" secondAttribute="top" constant="30" id="16F-Tg-DwQ"/>
+                                    <constraint firstItem="gWw-76-jfa" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" constant="10" id="CAi-E9-fQu"/>
+                                    <constraint firstAttribute="trailing" secondItem="fvh-XZ-vIR" secondAttribute="trailing" constant="10" id="FO5-TA-OWC"/>
+                                    <constraint firstItem="fvh-XZ-vIR" firstAttribute="centerX" secondItem="FF5-G2-WdH" secondAttribute="centerX" id="GLK-cS-frH"/>
+                                    <constraint firstItem="fmK-v2-Au2" firstAttribute="centerX" secondItem="gWw-76-jfa" secondAttribute="centerX" id="HCX-qb-Uyz"/>
+                                    <constraint firstItem="gWw-76-jfa" firstAttribute="centerY" secondItem="FF5-G2-WdH" secondAttribute="centerY" id="MGw-GR-eja"/>
+                                    <constraint firstItem="fmK-v2-Au2" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" constant="70" id="OUx-8S-gHx"/>
+                                    <constraint firstItem="fvh-XZ-vIR" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" constant="10" id="PvE-bX-3ql"/>
+                                    <constraint firstItem="yEA-pl-r6h" firstAttribute="top" secondItem="fvh-XZ-vIR" secondAttribute="bottom" constant="25" id="iXt-7n-3bR"/>
+                                    <constraint firstItem="yEA-pl-r6h" firstAttribute="centerX" secondItem="FF5-G2-WdH" secondAttribute="centerX" id="lak-eZ-Zj0"/>
+                                    <constraint firstItem="fvh-XZ-vIR" firstAttribute="top" secondItem="gWw-76-jfa" secondAttribute="bottom" constant="30" id="ylZ-ch-rxo"/>
+                                    <constraint firstAttribute="trailing" secondItem="gWw-76-jfa" secondAttribute="trailing" constant="10" id="yoh-0j-niD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2025/01/01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmK-v2-Au2">
-                                <rect key="frame" x="80" y="133" width="233" height="60"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="r68-a8-6w1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="32"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7aG-Zy-8hB" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="5Mw-ff-raX"/>
-                            <constraint firstItem="7aG-Zy-8hB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="80" id="AE5-3n-m0D"/>
-                            <constraint firstItem="fmK-v2-Au2" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="CPm-uw-m1O"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7aG-Zy-8hB" secondAttribute="trailing" constant="80" id="CuL-gG-flK"/>
-                            <constraint firstItem="fmK-v2-Au2" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="XGl-tS-0D3"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fmK-v2-Au2" secondAttribute="trailing" constant="80" id="gzW-q1-xEK"/>
-                            <constraint firstItem="fmK-v2-Au2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="80" id="sD8-uz-Ef3"/>
+                            <constraint firstItem="FF5-G2-WdH" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Ldf-59-dge"/>
+                            <constraint firstAttribute="trailing" secondItem="FF5-G2-WdH" secondAttribute="trailing" constant="10" id="aac-eH-IGo"/>
+                            <constraint firstItem="FF5-G2-WdH" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="eCQ-s0-lTz"/>
+                            <constraint firstItem="FF5-G2-WdH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="tGJ-vR-LYx"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="Timer" selectedImage="Timer" id="xvr-TB-Y84"/>
                     <navigationItem key="navigationItem" id="cQE-fw-R9c"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="reminingTimerText" destination="yEA-pl-r6h" id="ebK-c3-85S"/>
                         <outlet property="timerDate" destination="fmK-v2-Au2" id="ZIr-mn-qRe"/>
-                        <outlet property="timerText" destination="7aG-Zy-8hB" id="szc-sv-bS5"/>
+                        <outlet property="timerText" destination="gWw-76-jfa" id="pJE-49-Fn9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -100,9 +120,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

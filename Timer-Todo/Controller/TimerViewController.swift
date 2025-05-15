@@ -8,8 +8,9 @@
 import UIKit
 
 class TimerViewController: UIViewController {
-    @IBOutlet weak var timerText: UILabel!
     @IBOutlet weak var timerDate: UILabel!
+    @IBOutlet weak var timerText: UILabel!
+    @IBOutlet weak var reminingTimerText: UILabel!
     var timer: Timer!
     var date: Date!
 
@@ -36,6 +37,8 @@ class TimerViewController: UIViewController {
     @objc func updateTimer() {
         date = Date()
         timerText.text = TimerUtil.convertDateToTimerDisplayFormat(date: date)
+        reminingTimerText.text = TimerUtil.getRemainingTimeInDay(currentDate: date)
+        
     }
     // 画面を離れる際にTimerを破棄
     override func viewWillDisappear(_ animated: Bool) {

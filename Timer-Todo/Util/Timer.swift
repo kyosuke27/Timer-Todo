@@ -32,6 +32,18 @@ class TimerUtil {
             Calendar.current.component(.hour, from: date),
             Calendar.current.component(.minute, from: date),
             Calendar.current.component(.second, from: date))
-
     }
+    
+    // 現在時間を引数にして一日の残り時間を取得する
+    static func getRemainingTimeInDay(currentDate: Date) -> String {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: currentDate)
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        let remainingTime = endOfDay.timeIntervalSince(currentDate)
+        let hours = Int(remainingTime) / 3600
+        let minutes = (Int(remainingTime) % 3600) / 60
+        let seconds = Int(remainingTime) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
 }

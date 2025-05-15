@@ -24,6 +24,10 @@ class TaskViewController: UIViewController,
         getTaskData()
         // NavigationBarのBack文言を変更
         navigationItem.backButtonTitle = "一覧に戻る"
+        
+        // tableViewのセルの大きさを可変に
+        tableView.estimatedRowHeight = 66
+        tableView.rowHeight = UITableView.automaticDimension
 
     }
 
@@ -188,15 +192,20 @@ extension TaskViewController: UITableViewDataSource {
                 text: task.formattedTime())
             uiImage = UIImage(
                 systemName: tasks[indexPath.row].returnIconName())
+            cell.registerDataLabel?.text = TimerUtil.convertDateToDisplayFormat(date: task.registerDate)
 
         } else {
             cell.taskLabel?.attributedText = nil
             cell.timerLabel?.attributedText = nil
+            cell.registerDataLabel?.attributedText = nil
             // タスク未完了の場合、普通に表示
             cell.taskLabel?.text = task.taskName
             cell.timerLabel?.text = task.formattedTime()
+            cell.registerDataLabel?.text = TimerUtil.convertDateToDisplayFormat(date: task.registerDate)
+
         }
         cell.cellLabel?.image = uiImage
         return cell
     }
+    
 }
