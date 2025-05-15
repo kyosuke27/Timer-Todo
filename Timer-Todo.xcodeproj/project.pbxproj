@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		21C78BD63EFBE85BCBAD492F /* Pods_Timer_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235D85D6CFD7E9051143ACC6 /* Pods_Timer_Todo.framework */; };
 		6C74BF2E2DCC402200873DA5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C74BF2D2DCC402200873DA5 /* MessageUI.framework */; };
+		6CDAFFAC2DD66DED0018732B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDAFFAB2DD66DED0018732B /* AppTrackingTransparency.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		235D85D6CFD7E9051143ACC6 /* Pods_Timer_Todo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer_Todo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B67D98628BC77673E7A532 /* Pods-Timer-Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer-Todo.debug.xcconfig"; path = "Target Support Files/Pods-Timer-Todo/Pods-Timer-Todo.debug.xcconfig"; sourceTree = "<group>"; };
 		6C74BF2D2DCC402200873DA5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6CDAFFAB2DD66DED0018732B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		6CF401552DB72A5B00D894AB /* Timer-Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Timer-Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57B8C6E82A4D5FB872831E9 /* Pods-Timer-Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer-Todo.release.xcconfig"; path = "Target Support Files/Pods-Timer-Todo/Pods-Timer-Todo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CDAFFAC2DD66DED0018732B /* AppTrackingTransparency.framework in Frameworks */,
 				6C74BF2E2DCC402200873DA5 /* MessageUI.framework in Frameworks */,
 				21C78BD63EFBE85BCBAD492F /* Pods_Timer_Todo.framework in Frameworks */,
 			);
@@ -83,6 +86,7 @@
 		DA7E141CD81598C6B564B3F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CDAFFAB2DD66DED0018732B /* AppTrackingTransparency.framework */,
 				6C74BF2D2DCC402200873DA5 /* MessageUI.framework */,
 				235D85D6CFD7E9051143ACC6 /* Pods_Timer_Todo.framework */,
 			);
@@ -233,14 +237,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55B67D98628BC77673E7A532 /* Pods-Timer-Todo.debug.xcconfig */;
 			buildSettings = {
-				ADMOB_APP_ID = "ca-app-pub-3940256099942544~1458002511";
+				ADMOB_APP_ID = "ca-app-pub-4807410217573770~9568585407";
 				ADMOB_SETTING_VIEW_BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/2435281174";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 93WV698C8R;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 93WV698C8R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -262,6 +268,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kyosuke.TodayTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "my-iphone-develop15";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -272,14 +279,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D57B8C6E82A4D5FB872831E9 /* Pods-Timer-Todo.release.xcconfig */;
 			buildSettings = {
-				ADMOB_APP_ID = "ca-app-pub-3940256099942544~1458002511";
-				ADMOB_SETTING_VIEW_BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544~1458002511";
+				ADMOB_APP_ID = "ca-app-pub-4807410217573770~9568585407";
+				ADMOB_SETTING_VIEW_BANNER_AD_UNIT_ID = "ca-app-pub-4807410217573770/1441075147";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 93WV698C8R;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 93WV698C8R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -300,6 +309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kyosuke.TodayTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "my-iphone-develop15";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
