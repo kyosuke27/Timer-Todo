@@ -5,34 +5,49 @@
 //  Created by kyosuke on 2025/04/23.
 //
 
-import UIKit
 import GoogleMobileAds
+import UIKit
 
-class TimerViewController: UIViewController {
-    @IBOutlet weak var timerDate: UILabel!
+class TimerViewController: UIViewController, BannerViewDelegate {
     @IBOutlet weak var timerText: UILabel!
-    @IBOutlet weak var reminingTimerText: UILabel!
+    @IBOutlet weak var timerDate: UILabel!
     var timer: Timer!
     var date: Date!
-    var bannerView: BannerView!
+    private var isMobileAdsStartCalled = false
+    private var isViewDidAppearCalled = false
+    @IBOutlet weak var bannerView: BannerView!
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        isViewDidAppearCalled = true
+    }
+    
     override func viewDidLoad() {
-        let viewWidth = view.frame.inset(by: view.safeAreaInsets).width
-        //        bannerView.adUnitID =
-        //            Bundle.main.object(
-        //                forInfoDictionaryKey: "AdMobSettingViewBannerAdUnitId")
-        //            as? String
-        let adaptiveSize = currentOrientationAnchoredAdaptiveBanner(
-            width: viewWidth)
-        bannerView = BannerView(
-            adSize: adaptiveSize)
+        // adUnitIdを取得
         bannerView.adUnitID =
             Bundle.main.object(
                 forInfoDictionaryKey: "AdMobSettingViewBannerAdUnitId")
             as? String
         bannerView.rootViewController = self
-        addBannerViewToView(bannerView)
-        
+        bannerView.delegate = self
+        GoogleMobileAdsConsentManager.shared.gatherConsent(from: self) {
+            [weak self] consentError in
+            print("gatherConsent 💐")
+            guard let self else { return }
+
+            if let consentError {
+                print("Error: \(consentError.localizedDescription)")
+            }
+            // 同意が得られれば SDK を初期化
+            if GoogleMobileAdsConsentManager.shared.canRequestAds {
+                self.startGoogleMobileAdsSDK()
+            }
+        }
+
+        // 前回セッションで同意済みならすぐに SDK 起動
+        if GoogleMobileAdsConsentManager.shared.canRequestAds {
+            startGoogleMobileAdsSDK()
+        }
         let date = Date()
         timerDate.text = TimerUtil.convertDateToDisplayFormat(date: date)
         // ダークモードの判定
@@ -50,29 +65,6 @@ class TimerViewController: UIViewController {
             selector: #selector(updateTimer),
             userInfo: nil,
             repeats: true)
-    }
-    
-    func addBannerViewToView(_ bannerView: BannerView) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      // This example doesn't give width or height constraints, as the provided
-      // ad size gives the banner an intrinsic content size to size the view.
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: view.safeAreaLayoutGuide,
-                            attribute: .bottom,
-                            multiplier: 1,
-                            constant: 0),
-        NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
     }
 
     @objc func updateTimer() {
@@ -97,5 +89,33 @@ class TimerViewController: UIViewController {
             selector: #selector(updateTimer),
             userInfo: nil,
             repeats: true)
+    }
+    private func startGoogleMobileAdsSDK() {
+        DispatchQueue.main.async {
+            guard !self.isMobileAdsStartCalled else { return }
+
+            self.isMobileAdsStartCalled = true
+
+            // Initialize the Google Mobile Ads SDK.
+            MobileAds.shared.start()
+
+            if self.isViewDidAppearCalled {
+                print("load Banner✴️")
+                self.loadBannerAd()
+            }
+        }
+    }
+
+    func loadBannerAd() {
+        let viewWidth = view.frame.inset(by: view.safeAreaInsets).width
+
+        // Here the current interface orientation is used. Use
+        // GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth or
+        // GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth if you prefer to load an ad of a
+        // particular orientation
+        bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(
+            width: viewWidth)
+
+        bannerView.load(Request())
     }
 }

@@ -9,7 +9,7 @@ target 'Timer-Todo' do
   pod 'KDCircularProgress'
   pod 'FSCalendar'
   pod 'CalculateCalendarLogic'
-  pod 'RealmSwift', '~>10'
+  pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon', :branch => 'swift5'
   pod 'Onboard'
   pod 'Google-Mobile-Ads-SDK'

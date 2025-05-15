@@ -22,7 +22,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - KDCircularProgress
   - Onboard
-  - RealmSwift (~> 10)
+  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
 
 SPEC REPOS:
   trunk:
@@ -33,17 +33,24 @@ SPEC REPOS:
     - KDCircularProgress
     - Onboard
     - Realm
-    - RealmSwift
 
 EXTERNAL SOURCES:
   ChameleonFramework:
     :branch: swift5
     :git: https://github.com/wowansm/Chameleon
+  RealmSwift:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
     :commit: 96d52c36a45847fff60bcff7a58fec1e4bd7390b
     :git: https://github.com/wowansm/Chameleon
+  RealmSwift:
+    :commit: 712c52af6ae1aaca9aec83f1a14f4e5d48e3a24c
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
 
 SPEC CHECKSUMS:
   CalculateCalendarLogic: 45ea071add8efe0c30524607d3359eb79de8ba82
@@ -56,6 +63,6 @@ SPEC CHECKSUMS:
   Realm: 8b5cda39a41f17a1734da2f39c6004eb8745587a
   RealmSwift: 0b4f808fed6898f1f6c26f501f740efd80dff0b4
 
-PODFILE CHECKSUM: ee8a1ba9e60be3c63cbdb7f99cbe7eae7dca50c1
+PODFILE CHECKSUM: 6a5e5f54679674c180264f07ad399d8acdfb8994
 
 COCOAPODS: 1.16.2
