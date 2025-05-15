@@ -6,6 +6,9 @@ enum ThemeColor: Int {
     case `default`
     case red
     case blue
+    case green
+    case purple
+    case pink
 
     // 計算プロパティ
     var color: UIColor {
@@ -14,6 +17,9 @@ enum ThemeColor: Int {
         case .default: return UIColor(named: "DefaultColor")!
         case .red: return UIColor.flatRed()
         case .blue: return UIColor.flatSkyBlue()
+        case .green: return UIColor.flatGreen()
+        case .purple: return UIColor.flatMagenta()
+        case .pink: return UIColor.flatPink()
         }
     }
 }
