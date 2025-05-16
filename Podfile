@@ -8,7 +8,6 @@ target 'Timer-Todo' do
   # Pods for Timer-Todo
   pod 'KDCircularProgress'
   pod 'FSCalendar'
-  pod 'CalculateCalendarLogic'
   pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon', :branch => 'swift5'
   pod 'Onboard'
@@ -18,7 +17,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.6'
     end
   end
 end

@@ -1,5 +1,4 @@
 PODS:
-  - CalculateCalendarLogic (0.8.1)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -16,7 +15,6 @@ PODS:
     - Realm (= 10.54.4)
 
 DEPENDENCIES:
-  - CalculateCalendarLogic
   - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon`, branch `swift5`)
   - FSCalendar
   - Google-Mobile-Ads-SDK
@@ -26,7 +24,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - CalculateCalendarLogic
     - FSCalendar
     - Google-Mobile-Ads-SDK
     - GoogleUserMessagingPlatform
@@ -53,7 +50,6 @@ CHECKOUT OPTIONS:
     :submodules: true
 
 SPEC CHECKSUMS:
-  CalculateCalendarLogic: 45ea071add8efe0c30524607d3359eb79de8ba82
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   Google-Mobile-Ads-SDK: db00a3836f288f94e52114f312b56fe066699d82
@@ -63,6 +59,6 @@ SPEC CHECKSUMS:
   Realm: 8b5cda39a41f17a1734da2f39c6004eb8745587a
   RealmSwift: 0b4f808fed6898f1f6c26f501f740efd80dff0b4
 
-PODFILE CHECKSUM: 6a5e5f54679674c180264f07ad399d8acdfb8994
+PODFILE CHECKSUM: a4d1ff2cdb24235ce35bfdeb7a490adb45c46217
 
 COCOAPODS: 1.16.2

@@ -11,6 +11,7 @@ import UIKit
 class TimerViewController: UIViewController, BannerViewDelegate {
     @IBOutlet weak var timerText: UILabel!
     @IBOutlet weak var timerDate: UILabel!
+    @IBOutlet weak var reminingTimerText: UILabel!
     var timer: Timer!
     var date: Date!
     private var isMobileAdsStartCalled = false
