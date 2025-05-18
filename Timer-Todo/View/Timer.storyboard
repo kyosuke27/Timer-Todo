@@ -60,18 +60,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日の残り時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-XZ-vIR">
-                                        <rect key="frame" x="10" y="416.66666666666669" width="353" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEA-pl-r6h">
-                                        <rect key="frame" x="123.66666666666666" y="477.66666666666663" width="126" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqV-xV-RqN" userLabel="BannerView" customClass="GADBannerView">
                                         <rect key="frame" x="0.0" y="636" width="373" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -79,24 +67,31 @@
                                             <constraint firstAttribute="height" constant="50" id="DMh-ke-PKS"/>
                                         </constraints>
                                     </view>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AF3-6C-k49">
+                                        <rect key="frame" x="80" y="120" width="213" height="32"/>
+                                        <segments>
+                                            <segment title="時計"/>
+                                            <segment title="逆時計"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="tapSegmentButton:" destination="Y6W-OH-hqX" eventType="valueChanged" id="kRz-It-GbG"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="AF3-6C-k49" firstAttribute="top" secondItem="fmK-v2-Au2" secondAttribute="bottom" constant="30" id="0Fv-DB-RUd"/>
                                     <constraint firstItem="fmK-v2-Au2" firstAttribute="top" secondItem="FF5-G2-WdH" secondAttribute="top" constant="30" id="16F-Tg-DwQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="AF3-6C-k49" secondAttribute="trailing" constant="80" id="5gQ-J5-FDu"/>
                                     <constraint firstItem="gWw-76-jfa" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" constant="10" id="CAi-E9-fQu"/>
-                                    <constraint firstAttribute="trailing" secondItem="fvh-XZ-vIR" secondAttribute="trailing" constant="10" id="FO5-TA-OWC"/>
-                                    <constraint firstItem="fvh-XZ-vIR" firstAttribute="centerX" secondItem="FF5-G2-WdH" secondAttribute="centerX" id="GLK-cS-frH"/>
                                     <constraint firstItem="fmK-v2-Au2" firstAttribute="centerX" secondItem="gWw-76-jfa" secondAttribute="centerX" id="HCX-qb-Uyz"/>
                                     <constraint firstItem="gWw-76-jfa" firstAttribute="centerY" secondItem="FF5-G2-WdH" secondAttribute="centerY" id="MGw-GR-eja"/>
                                     <constraint firstItem="fmK-v2-Au2" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" constant="70" id="OUx-8S-gHx"/>
-                                    <constraint firstItem="fvh-XZ-vIR" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" constant="10" id="PvE-bX-3ql"/>
                                     <constraint firstItem="rqV-xV-RqN" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" id="QbK-us-MBE"/>
                                     <constraint firstAttribute="bottom" secondItem="rqV-xV-RqN" secondAttribute="bottom" id="Tqx-On-pSJ"/>
                                     <constraint firstAttribute="trailing" secondItem="rqV-xV-RqN" secondAttribute="trailing" id="iPr-IR-KgG"/>
-                                    <constraint firstItem="yEA-pl-r6h" firstAttribute="top" secondItem="fvh-XZ-vIR" secondAttribute="bottom" constant="25" id="iXt-7n-3bR"/>
-                                    <constraint firstItem="yEA-pl-r6h" firstAttribute="centerX" secondItem="FF5-G2-WdH" secondAttribute="centerX" id="lak-eZ-Zj0"/>
+                                    <constraint firstItem="AF3-6C-k49" firstAttribute="leading" secondItem="FF5-G2-WdH" secondAttribute="leading" constant="80" id="wZs-NS-opj"/>
                                     <constraint firstItem="rqV-xV-RqN" firstAttribute="centerX" secondItem="FF5-G2-WdH" secondAttribute="centerX" id="xsa-nW-HJX"/>
-                                    <constraint firstItem="fvh-XZ-vIR" firstAttribute="top" secondItem="gWw-76-jfa" secondAttribute="bottom" constant="30" id="ylZ-ch-rxo"/>
                                     <constraint firstAttribute="trailing" secondItem="gWw-76-jfa" secondAttribute="trailing" constant="10" id="yoh-0j-niD"/>
                                 </constraints>
                             </view>
@@ -115,8 +110,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bannerView" destination="rqV-xV-RqN" id="5i4-Zm-jks"/>
-                        <outlet property="reminingTimerText" destination="yEA-pl-r6h" id="Mye-Zm-OOg"/>
                         <outlet property="timerDate" destination="fmK-v2-Au2" id="ZIr-mn-qRe"/>
+                        <outlet property="timerSegmentButton" destination="AF3-6C-k49" id="mvb-KU-9xG"/>
                         <outlet property="timerText" destination="gWw-76-jfa" id="pJE-49-Fn9"/>
                     </connections>
                 </viewController>

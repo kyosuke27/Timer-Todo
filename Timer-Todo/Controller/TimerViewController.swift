@@ -11,7 +11,7 @@ import UIKit
 class TimerViewController: UIViewController, BannerViewDelegate {
     @IBOutlet weak var timerText: UILabel!
     @IBOutlet weak var timerDate: UILabel!
-    @IBOutlet weak var reminingTimerText: UILabel!
+    @IBOutlet weak var timerSegmentButton: UISegmentedControl!
     var timer: Timer!
     var date: Date!
     private var isMobileAdsStartCalled = false
@@ -20,9 +20,8 @@ class TimerViewController: UIViewController, BannerViewDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isViewDidAppearCalled = true
     }
-    
+
     override func viewDidLoad() {
         // adUnitIdを取得
         bannerView.adUnitID =
@@ -33,7 +32,6 @@ class TimerViewController: UIViewController, BannerViewDelegate {
         bannerView.delegate = self
         GoogleMobileAdsConsentManager.shared.gatherConsent(from: self) {
             [weak self] consentError in
-            print("gatherConsent 💐")
             guard let self else { return }
 
             if let consentError {
@@ -71,26 +69,18 @@ class TimerViewController: UIViewController, BannerViewDelegate {
     @objc func updateTimer() {
         date = Date()
         timerText.text = TimerUtil.convertDateToTimerDisplayFormat(date: date)
-        reminingTimerText.text = TimerUtil.getRemainingTimeInDay(currentDate: date)
-        
+    }
+
+    @objc func updateReverseTimer() {
+        date = Date()
+        timerText.text = TimerUtil.getRemainingTimeInDay(
+            currentDate: date)
     }
     // 画面を離れる際にTimerを破棄
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        timer.invalidate()
     }
 
-    // 画面を戻る際にTimerを再設定
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // タイマーの設定
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateTimer),
-            userInfo: nil,
-            repeats: true)
-    }
     private func startGoogleMobileAdsSDK() {
         DispatchQueue.main.async {
             guard !self.isMobileAdsStartCalled else { return }
@@ -101,7 +91,6 @@ class TimerViewController: UIViewController, BannerViewDelegate {
             MobileAds.shared.start()
 
             if self.isViewDidAppearCalled {
-                print("load Banner✴️")
                 self.loadBannerAd()
             }
         }
@@ -119,4 +108,36 @@ class TimerViewController: UIViewController, BannerViewDelegate {
 
         bannerView.load(Request())
     }
+    @IBAction func tapSegmentButton(_ sender: UISegmentedControl) {
+        timer.invalidate()
+        timer = nil
+        selectedSegmetnIndex(index: sender.selectedSegmentIndex)
+    }
+
+    func selectedSegmetnIndex(index: Int) {
+        switch index {
+        case 0:
+            // 普通の時計
+            // 時計の更新処理
+            timer = Timer.scheduledTimer(
+                timeInterval: 1,
+                target: self,
+                selector: #selector(updateTimer),
+                userInfo: nil,
+                repeats: true)
+        case 1:
+            // 逆時計
+            // 逆時計の更新処理
+            timer = Timer.scheduledTimer(
+                timeInterval: 1,
+                target: self,
+                selector: #selector(updateReverseTimer),
+                userInfo: nil,
+                repeats: true)
+        default:
+            // defaultはないが、エラー回避のために追加
+            break
+        }
+    }
+
 }
